@@ -1,0 +1,20 @@
+{% extends 'blogengine/base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+	<h1 class="post-create-title">{{title}}</h1>
+	<form method="POST" class="post-from" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{form.as_p}}
+		{% if post.gallery.all %}
+			<div class="edit post-images">
+				{% for image_obj in post.gallery.all %}
+					<img src="{{ image_obj.thumbnail.url }}">
+				{% endfor %}
+			</div>
+		{% endif %}
+		<input name="gallery" type="file" size="10" accept="image/*" multiple>
+		<button class="btn btn-success">Загрузить</button>
+	</form>
+{% endblock %}

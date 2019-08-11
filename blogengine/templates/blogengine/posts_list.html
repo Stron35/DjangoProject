@@ -1,0 +1,20 @@
+{% extends 'blogengine/base.html' %}
+
+{% block title %}Blogs posts{% endblock %}
+
+{% block content %}
+	{% for post in posts %}
+		<div class="post">
+			<h2 class="post-title"><a href="{% url 'post_detail' slug=post.slug %}">{{post.title}}</a></h2>
+			<div class="post-body">
+				{{post.text_post}}
+			</div>
+			<div class="post-images">
+				{% for image_obj in post.gallery.all %}
+					<img src="{{ image_obj.image.url }}">
+				{% endfor %}
+		</div>
+			<p class="post-create-date">{{post.create_at}}</p>
+		</div>
+	{% endfor %}
+{% endblock %}
