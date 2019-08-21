@@ -1,0 +1,11 @@
+{% extends 'blogengine/base.html' %}
+
+{% block title %}Sigh in{% endblock %}
+
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Войти">
+    </form>
+{% endblock %}

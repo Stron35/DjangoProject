@@ -3,6 +3,9 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
+from django.dispatch import receiver
+import os
+import shutil
 from PIL import Image
 import uuid
 
@@ -32,6 +35,9 @@ class Post(models.Model):
 	slug = models.SlugField(max_length=150, blank = True)
 	create_at = models.DateTimeField(auto_now_add = True)
 
+	class Meta:
+		verbose_name_plural = 'Post'
+
 	def get_absolute_url(self):
 		return reverse('post_detail', kwargs = {'slug': self.slug})
 
@@ -56,7 +62,6 @@ class Gallery(models.Model):
 			factor = 1
 		else:
 			factor = width/heigth
-			print(factor)
 			width = 800
 			heigth = width/factor
 		size = (int(width), int(heigth))
@@ -68,3 +73,16 @@ class Gallery(models.Model):
 		thumb = thumb.resize(thumb_size, Image.ANTIALIAS)
 		thumb.save(self.thumbnail.path)
 
+@receiver(models.signals.post_delete, sender=Gallery)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+
+	if instance.image:
+		if os.path.isfile(instance.image.path):
+			delete_folder_image = os.path.dirname(instance.image.path)
+			os.remove(instance.image.path)
+
+	if instance.thumbnail:
+		if os.path.isfile(instance.thumbnail.path):
+			delete_folder_thumbnail = os.path.dirname(instance.thumbnail.path)
+			os.remove(instance.thumbnail.path)
+			shutil.rmtree(delete_folder_image, ignore_errors=True)

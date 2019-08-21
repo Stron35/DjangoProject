@@ -6,7 +6,17 @@
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-	{% block content %}
-	{% endblock %}
+    <div class="auth-button">
+        <a href="{% url 'posts_list' %}"><button type="button" class="btn btn-secondary">Главная страница</button></a>
+        {% if user.is_authenticated %}
+            <p>You're authorized as {{user.get_username}}</p>
+            <a href="{% url 'logout' %}"><button type="button" class="btn btn-secondary">Выход</button></a>
+        {% else %}
+            <a href="{% url 'login' %}"><button type="button" class="btn btn-secondary">Авторизация</button></a>
+            <a href="{% url 'registration' %}"><button type="button" class="btn btn-secondary">Регистрация</button></a>
+        {% endif %}
+    </div>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

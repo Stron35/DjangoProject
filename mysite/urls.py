@@ -22,3 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blogengine.urls'))
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = "Admin panel"
+admin.site.site_title = "Admin site panel"
+admin.site.index_title = "Site administartion"

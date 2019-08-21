@@ -1,0 +1,18 @@
+{% extends 'blogengine/base.html' %}
+
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+<h1>Удалить пост: {{ post.title }}</h1>
+	<form action="{% url 'post_delete' slug=post.slug %}" method="POST" class="post-form">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<div class="post-image-edit">
+            {% for image_obj in post.gallery.all %}
+                <img src="{{ image_obj.thumbnail.url }}">
+            {% endfor %}
+        </div>
+		<button class="btn btn-danger btn-block">Удалить</button>
+	</form>
+{% endblock %}
+
