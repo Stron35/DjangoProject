@@ -6,7 +6,16 @@
 <h1>Удалить пост: {{ post.title }}</h1>
 	<form action="{% url 'post_delete' slug=post.slug %}" method="POST" class="post-form">
 		{% csrf_token %}
-		{{ form.as_p }}
+		{% for field in form %}
+            {{field.label_tag}}
+            <div>{{field}}</div>
+            <div>{{field.help_text}}</div>
+            {% if field.errors%}
+                {% for error in field.errors %}
+                    <div>{{error}}</div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
 		<div class="post-image-edit">
             {% for image_obj in post.gallery.all %}
                 <img src="{{ image_obj.thumbnail.url }}">

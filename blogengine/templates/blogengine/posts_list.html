@@ -3,18 +3,37 @@
 {% block title %}Blogs posts{% endblock %}
 
 {% block content %}
-	{% for post in posts %}
-		<div class="post">
-			<h2 class="post-title"><a href="{% url 'post_detail' slug=post.slug %}">{{post.title}}</a></h2>
-			<div class="post-body">
-				{{post.text_post}}
-			</div>
-			<div class="post-images">
-				{% for image_obj in post.gallery.all %}
-					<img src="{{ image_obj.image.url }}">
-				{% endfor %}
-		</div>
-			<p class="post-create-date">{{post.create_at}}</p>
-		</div>
-	{% endfor %}
+    {% for post in posts %}     
+      <div class="container">
+        <div class="row">
+          <div class="col s12 m8 xl8">
+            <div class="card">
+              <div class="card-image" >
+                {% for image_obj in post.gallery.all %}
+                  <img src="{{ image_obj.image.url }}">
+                {% endfor %}
+              </div>
+              <div class="card-content">
+                <p>{{post.text}}</p>
+                <p>Create at {{post.create_at}} by {{post.author}}</p>
+              </div>
+              <div class="card-action">
+                <a href="{% url 'post_detail' slug=post.slug %}">{{post.title}}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% if user.is_authenticated %}
+      <div class="button-add" style="position: fixed; /* Фиксированное положение */
+            right: 10px; /* Расстояние от правого края окна браузера */
+            bottom: 3%; /* Расстояние сверху */
+            padding: 10px; /* Поля вокруг текста */ 
+            background: #ffe; /* Цвет фона */ ">
+        <a class="btn-floating btn-large waves-effect waves-light red" href="{% url 'post_create' %}" >
+          <i class="material-icons">add</i>
+        </a>
+      </div>  
+    {% endif %}
 {% endblock %}

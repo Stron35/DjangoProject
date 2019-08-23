@@ -6,7 +6,16 @@
 	<h1 class="post-create-title">{{title}}</h1>
 	<form method="POST" class="post-from" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{form.as_p}}
+		{% for field in form %}
+            {{field.label_tag}}
+            <div>{{field}}</div>
+            <div>{{field.help_text}}</div>
+            {% if field.errors%}
+                {% for error in field.errors %}
+                    <div>{{error}}</div>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
 		{% if post.gallery.all %}
 			<div class="edit post-images">
 				{% for image_obj in post.gallery.all %}
@@ -14,7 +23,15 @@
 				{% endfor %}
 			</div>
 		{% endif %}
-		<input name="gallery" type="file" size="10" accept="image/*" multiple>
+		<div class="file-field input-field">
+      		<div class="btn">
+        		<span>File</span>
+        		<input name="gallery" type="file" accept="image/*" multiple>
+      		</div>
+      		<div class="file-path-wrapper">
+        		<input class="file-path validate" type="text" placeholder="Upload one or more files">
+      		</div>
+    	</div>
 		<button class="btn btn-success">Загрузить</button>
 	</form>
 {% endblock %}

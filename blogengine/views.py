@@ -72,21 +72,21 @@ class PostDelete(DeleteView):
 
 class RegistrationFormView(FormView):
     form_class = RegisterForm
-    success_url = '/login/'
+    success_url = '/accounts/login/'
     template_name = 'blogengine/registration.html'
 
     def form_valid(self, form):
+        print(form)
         form.save()
-        print('Сохранил')
         return super(RegistrationFormView, self).form_valid(form)
 
     def form_invalid(self, form):
-        print('Не сохранил')
+        print(form)
         return super(RegistrationFormView, self).form_invalid(form)
 
 
 class LoginFormView(FormView):
-    form_class = AuthenticationForm
+    form_class = LoginForm
     success_url = '/'
     template_name = 'blogengine/login.html'
 
