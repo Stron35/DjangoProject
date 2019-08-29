@@ -1,16 +1,16 @@
-{% load static %}
+{% load staticfiles%}
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="{% static 'js/scripts.js' %}"></script>
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">     
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
@@ -31,5 +31,16 @@
     </nav>
     {% block content %}
     {% endblock %}
+
+<!--     <script>
+        //Material Box
+        const mb = document.querySelectorAll('.materialboxed');
+        M.Materialbox.init(mb, {});
+    </script> -->
+<!--     <script type="text/javascript" scr="{% static 'js/app.js' %}"></script> -->
+ <!--    {% block js %}
+        
+    {% endblock js %}  --> 
 </body>
+
 </html>

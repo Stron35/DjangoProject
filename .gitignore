@@ -5,4 +5,5 @@ VenvDjango
 db.sqlite3
 /static
 /media
+/static_cdn
 .DS_Store
