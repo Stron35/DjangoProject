@@ -1,3 +1,12 @@
-.post-picture{
-	height: 100%;
+i.btn-circle {
+    position: fixed; /* Фиксированное положение */
+    right: 20px; /* Расстояние от правого края окна браузера */
+    bottom: 5%; /* Расстояние снизу */
+    font-size: 48px;
+    height: 48px;
+    width: 48px;
+    text-align: center;
+    color: #fff;
+    background-color: #007bff;;
+    border-radius: 50%;
 }

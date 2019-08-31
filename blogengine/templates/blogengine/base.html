@@ -1,46 +1,44 @@
-{% load staticfiles%}
-
+{% load staticfiles %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+<!-- --------------------------my css------------------------------------------------ -->
     <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+<!---------------------------------------- css bootstrap ---------------------------- -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<!-------------------------------- js bootstrap ----------------------------------------------------------- -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- my scripts -->
     <script src="{% static 'js/scripts.js' %}"></script>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- google icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <nav>
-        <div class="nav-wrapper">
-          <a href="{% url 'posts_list' %}" class="brand-logo">Stron blog</a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            {% if user.is_authenticated %}
-                <li><a href="#"><i class="material-icons left">person</i>{{user.get_username}}</a></li>
-                <li><a href="{% url 'post_create' %}"><i class="material-icons left">add</i>New post</a></li>
-                <li><a href="{% url 'logout' %}">Logout</a></li>
-            {% else %}
-                <li><a href="{% url 'registration' %}">Sign up</a></li>
-                <li><a href="{% url 'login' %}">Sign in</a></li>
-            {% endif %}
-          </ul>
-        </div>
-    </nav>
-    {% block content %}
-    {% endblock %}
-
-<!--     <script>
-        //Material Box
-        const mb = document.querySelectorAll('.materialboxed');
-        M.Materialbox.init(mb, {});
-    </script> -->
-<!--     <script type="text/javascript" scr="{% static 'js/app.js' %}"></script> -->
- <!--    {% block js %}
-        
-    {% endblock js %}  --> 
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="{% url 'posts_list' %}">Stron blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        {% if user.is_authenticated %}
+          <a class="nav-item nav-link" href="#"><i class="material-icons" style="vertical-align: -6px;">person</i>{{user.get_username}}</a>
+          <a class="nav-item nav-link" href="{% url 'post_create' %}">New post</a>
+          <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
+        {% else %}
+          <a class="nav-item nav-link" href="{% url 'registration' %}">Sign up</a>
+          <a class="nav-item nav-link" href="{% url 'login' %}">Sign in</a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+  {% block content %}
+  {% endblock %}
 </body>
 
 </html>
