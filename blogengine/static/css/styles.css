@@ -1,3 +1,7 @@
+a.navbar-brand{
+    font-size: 30px;
+}
+
 i.btn-circle {
     position: fixed; /* Фиксированное положение */
     right: 20px; /* Расстояние от правого края окна браузера */
@@ -9,4 +13,26 @@ i.btn-circle {
     color: #fff;
     background-color: #007bff;;
     border-radius: 50%;
+}
+
+.errorlist{
+    margin-bottom: 0
+}
+
+.alert{
+    margin-top: 10px;
+}
+
+.card{
+    margin-top: 20px;
+
+}
+
+.card-body{
+    background-color: #F6F6F6;
+}
+
+.card-footer{
+    background-color: rgba(0,0,0,.0)!important;
+    padding: 0.75em 0!important;
 }

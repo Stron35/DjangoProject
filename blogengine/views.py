@@ -4,6 +4,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormVi
 from django.views.generic.base import View
 from django.urls import reverse
 from django.contrib.auth import login, logout
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
 from .models import Post, Gallery
 from .forms import *
 
@@ -15,6 +17,20 @@ def post_list(request):
 def post_detail(request, slug):
     post = get_object_or_404(Post, slug__iexact = slug)
     return render(request, 'blogengine/post_detail.html', {'post': post})
+
+# @login_required
+# @transaction.atomic
+# def update_profile(request):
+#     if request.method == 'POST':
+#         profile_form = ProfileForm(request.POST, instance=request.user.profile)
+#         if profile_form.is_valid():
+#             profile_form.save()
+#             return redirect(reverse('post_list'))
+#         else:
+#             messages.error(request, _('Please correct the error below.'))
+#     else:
+#         profile_form = ProfileForm(instance=request.user.profile)
+#     return render(request, 'blogengine/profile.html', {'profile_form':profile_form})
 
 
 class PostCreate(CreateView):
@@ -94,6 +110,7 @@ class LoginFormView(FormView):
         self.user = form.get_user()
         login(self.request, self.user)
         return super(LoginFormView, self).form_valid(form)
+
 
 class LogoutView(View):
     def get(self, request):

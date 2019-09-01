@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.utils import timezone
 from django.utils.text import slugify
 from django.dispatch import receiver
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 import os
 import shutil
 from PIL import Image
@@ -27,9 +29,37 @@ def generate_path_image_thumbnail(instance, filename):
 	image_path = '/'.join(['media','post_images',str(time_now.year),str(time_now.month),str(time_now.day) ,str(instance.post.slug),'thumbnail',str(filename)])
 	return image_path
 
+def generate_path_image_profile(instance, filename):
+	time_now = timezone.now()
+	ext = filename.split('.')[-1]
+	filename = '.'.join([str(uuid.uuid4()),str(ext)])
+	image_path = '/'.join(['media', 'user_image',str(time_now.year), str(time_now.month), str(filename)])
+	return image_path
+
+
+# class Profile(models.Model):
+# 	user = models.OneToOneField(User, on_delete=models.CASCADE)
+# 	bio = models.TextField(max_length=200, blank=True)
+# 	userImage = models.ImageField(upload_to=generate_path_image_profile,
+# 		default='media/default_images/profile_image/profileomage.png')
+
+# @receiver(post_save,sender=User)
+# def create_user_profile(sender, instance, created, **kwargs):
+# 	if created:
+# 		Profile.objects.create(user=instance)
+
+# @receiver(post_save, sender=User)
+# def save_user_profile(sender, instance, **kwargs):
+# 	instance.profile.save()
+
+# @receiver(post_save, sender=User)
+# def create_or_update_user_profile(sender, instance, created, **kwargs):
+#     if created:
+#         instance.profile = Profile.objects.create(user=instance)
+#     # instance.profile.save()
 
 class Post(models.Model):
-	author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
+	author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
 	title = models.CharField(max_length = 100)
 	text = models.TextField()
 	slug = models.SlugField(max_length=150, blank = True)

@@ -4,6 +4,6 @@ __pycache__
 VenvDjango
 db.sqlite3
 /static
-/media
+/media/post_images
 /static_cdn
 .DS_Store
