@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.base import View
 from django.urls import reverse
@@ -18,20 +19,6 @@ def post_detail(request, slug):
     post = get_object_or_404(Post, slug__iexact = slug)
     return render(request, 'blogengine/post_detail.html', {'post': post})
 
-# @login_required
-# @transaction.atomic
-# def update_profile(request):
-#     if request.method == 'POST':
-#         profile_form = ProfileForm(request.POST, instance=request.user.profile)
-#         if profile_form.is_valid():
-#             profile_form.save()
-#             return redirect(reverse('post_list'))
-#         else:
-#             messages.error(request, _('Please correct the error below.'))
-#     else:
-#         profile_form = ProfileForm(instance=request.user.profile)
-#     return render(request, 'blogengine/profile.html', {'profile_form':profile_form})
-
 
 class PostCreate(CreateView):
     model = Post
@@ -39,6 +26,7 @@ class PostCreate(CreateView):
 
     def form_valid(self,form):
         new_post = form.save(commit = False)
+        print(form)
         new_post.author = self.request.user
         new_post.save()
         for item in self.request.FILES.getlist('gallery'):
@@ -67,7 +55,7 @@ class PostEdit(UpdateView):
         edit_post.author = self.request.user
         edit_post.save()
         for item in self.request.FILES.getlist('gallery'):
-            Gallery.objects.create(image = item, post = edit_post)
+            Gallery.objects.create(image = item, thumbnail = item, post = edit_post)
         return super().form_valid(form)
 
 
@@ -116,3 +104,20 @@ class LogoutView(View):
     def get(self, request):
         logout(request)
         return redirect(reverse('posts_list'))
+
+
+class ProfileView(DetailView):
+    model = User
+    template_name = 'blogengine/profile.html'
+    slug_field = 'username'
+
+
+class ProfileUpdateView(UpdateView):
+    model = User
+    fields = ('userImage','bio')
+    slug_field = 'username'
+    template_name = 'blogengine/profile_edit.html'
+
+    def form_valid(self, form):  
+        form.save()
+        return super().form_valid(form)

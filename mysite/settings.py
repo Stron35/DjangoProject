@@ -77,13 +77,14 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'mydb',
+        'NAME': '1db',
         'USER': 'postgres',
         'PASSWORD': 'Stronciy',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
+
 
 
 # Password validation
@@ -104,6 +105,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'blogengine.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -126,8 +128,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 STATIC_URL = '/static/'
 
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-
-MEDIA_DIR = os.path.join(BASE_DIR, 'media')
-
-MEDIA_URL = '/media/post_images/'
+MEDIA_URL = '/media/'

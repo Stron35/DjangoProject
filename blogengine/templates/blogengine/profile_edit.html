@@ -1,0 +1,20 @@
+{% extends 'blogengine/base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+  <form method="POST" class="profile-edit" enctype="multipart/form-data">
+    {% csrf_token %}
+    <img src="{{ user.userImage.url }}">
+    <p>Username {{user}}</p>
+    <p>Email {{user.email}}</p>
+    <p>Bio {{user.bio}}</p>
+    <p>Edit</p>
+    
+    	{{form.as_p}}
+    	<input name="profile_image" type="file" accept="image/*" multiple>
+	    <button type="submit">Submit</button>
+	    <!-- <input type="submit" value="Submit"> -->
+    
+  </form>
+{% endblock %}

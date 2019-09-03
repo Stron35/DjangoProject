@@ -1,12 +1,15 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
-from .models import Post
+from .models import Post, User
 
-# class ProfileForm(forms.ModelForm):
+# class UserEditForm(forms.ModelForm):
 #     class Meta:
-#         model = Profile
-#         fields = ('bio', 'userImage')
+#         model = User
+#         fields = ('userImage','bio')
+#         slug_field = 'username'
+        
+
 
 class PostForm(forms.ModelForm):
     class Meta:
