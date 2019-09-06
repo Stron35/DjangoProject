@@ -5,7 +5,10 @@
 {% block content %}
   <form method="post">
     {% csrf_token %}
-    <img src="{{ user.userImage.url}}">
+    <div class="profile-image">
+      <img src="{{ user.userImage.url}}">
+    </div>
+    
     <p>Username {{user}}</p>
     <p>Email {{user.email}}</p>
     <p>Bio {{user.bio}}</p>

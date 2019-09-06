@@ -36,3 +36,11 @@ i.btn-circle {
     background-color: rgba(0,0,0,.0)!important;
     padding: 0.75em 0!important;
 }
+
+.card-footer div{
+    display: inline-block;
+}
+
+.card-footer .profile-image img{
+    width: 24px
+}

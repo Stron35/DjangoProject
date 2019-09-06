@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm
 from django.contrib.auth.models import User
-from .models import Post, User
+from .models import Post, User, Comment
 
 # class UserEditForm(forms.ModelForm):
 #     class Meta:
@@ -17,7 +17,16 @@ class PostForm(forms.ModelForm):
         fields = ('title', 'text',)
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title'}),
-            'text': forms.Textarea(attrs={'class':'materialize-textarea','placeholder':'Write post text here'}),
+            'text': forms.Textarea(attrs={'placeholder':'Write post text here'}),
+        }
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('text',)
+        widgets = {
+            'text': forms.Textarea(attrs={'placeholder':'Write comment text here'})
         }
 
 

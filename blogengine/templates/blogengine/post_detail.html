@@ -47,8 +47,35 @@
               <p class="card-text">
                 <small class="text-muted">Create at {{post.create_at}} by {{post.author}}</small>
               </p>
+              <div class="profile-image">
+                <img src="{{post.author.userImage.url}}" alt="Profile image">
+              </div>
             </div>
           </div>
+        </div>
+        <div class="post-comments">
+          <div class="form-create">
+            <form method="POST" action="" class="comment-form">
+              {% csrf_token %}
+              {{commentform.as_p}}
+              <button type="submit" class="save btn btn-default">Send</button>
+            </form>
+          </div>
+          
+          {% for comment in post.comment.all %}
+            <div class="comment">
+              <div class="comment-date"><small>{{comment.create_at}}</small></div>
+              <div class="comment-author">
+                <p>{{comment.author}}</p>
+                <img src="{{post.author.userImage.url}}" alt="Profile image">
+              </div>
+              <div class="comment-text">
+                <p>{{comment.text|linebreaks}}</p>
+              </div>
+            </div>
+          {% empty %}
+            <p>No comment yet</p>
+          {% endfor %}
         </div>
       </div>
     </div>

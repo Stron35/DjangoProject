@@ -97,6 +97,18 @@ class Gallery(models.Model):
         thumb = thumb.resize(thumb_size, Image.ANTIALIAS)
         thumb.save(self.thumbnail.path)
 
+
+class Comment(models.Model):
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name='comment')
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank = True)
+    text = models.TextField()
+    create_at = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.text
+
+
+
 @receiver(models.signals.post_delete, sender=Gallery)
 def auto_delete_file_on_delete(sender, instance, **kwargs):
 

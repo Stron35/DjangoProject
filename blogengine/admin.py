@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Post, Gallery, User
+from .models import Post, Gallery, User, Comment
 
 class ImageInLine(admin.TabularInline):
 	model = Gallery
@@ -12,5 +12,6 @@ class PostAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(User, UserAdmin)
 admin.site.register(Post, PostAdmin)
+admin.site.register(Comment)
 
 
