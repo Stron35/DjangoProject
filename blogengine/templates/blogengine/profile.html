@@ -3,14 +3,27 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
-  <form method="post">
-    {% csrf_token %}
+  <div class="usercard">
+    <h1>User profile
+      {% if user.is_authenticated and user.get_username == profile.username %}
+      <a href="{% url 'profile_edit' slug=user.get_username %}"><i class="material-icons">edit</i></a></h1>
+      {% endif %}  
     <div class="profile-image">
-      <img src="{{ user.userImage.url}}">
+      <img src="{{ profile.userImage.url}}">
     </div>
+    <div class="profile_username">
+      <h3>Username</h3>
+      <p>{{profile}}</p>
+
+    </div>
+    <div class="profile_email">
+      <h3>E-mail</h3>
+      <p>{{profile.email}}</p>
+    </div>
+    <div class="profile_bio">
+      <h3>Bio</h3>
+      <p>{{profile.bio}}</p>
+    </div>   
+  </div>
     
-    <p>Username {{user}}</p>
-    <p>Email {{user.email}}</p>
-    <p>Bio {{user.bio}}</p>
-  </form>
 {% endblock %}

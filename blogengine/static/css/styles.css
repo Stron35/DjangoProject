@@ -41,6 +41,434 @@ i.btn-circle {
     display: inline-block;
 }
 
-.card-footer .profile-image img{
+.card-footer a, .card-footer a:hover{
+    text-decoration: none;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.footer-text{
+    vertical-align: -15px;
+    margin-left: 20px;
+}
+
+.footer-text p{
+    color: #6c757d;
+    font-size: 14px;
+    margin: 0;
+}
+
+.card-footer img{
     width: 24px
+}
+
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.loginbox{
+    width: 320px;
+    height: 450px;
+    background: #007bff;
+    color: #fff;
+    top:50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-35%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    top: -50px;
+    left: calc(50% - 50px);
+    background-color: #fff;
+}
+
+.loginbox h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.loginbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.loginbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.loginbox input[type="text"], .loginbox input[type="password"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 50px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 0;
+}
+
+.loginbox input[type="text"]::-webkit-input-placeholder,.loginbox input[type="password"]::-webkit-input-placeholder
+{
+    color: #fff
+}
+
+.loginbox input[type="text"]:focus::-webkit-input-placeholder,.loginbox input[type="password"]:focus::-webkit-input-placeholder
+{
+    opacity: 0;
+    transition: 0.2s ease
+}
+
+.loginbox input[type="submit"]
+{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #fff;
+    color: #000;
+    font-size: 16px;
+    border-radius: 20px;
+}
+
+.loginbox input[type="submit"]:hover
+{
+    cursor: pointer;
+    background-color: #FFD700;
+    color: #000;
+    transition: 0.3s ease
+}
+
+.loginbox a{
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff
+}
+
+.loginbox a:hover{
+    color: #FFD700;
+    text-decoration: none;
+}
+
+.loginbox .errors{
+    position: absolute;
+    transform: translate(110%,-190%);
+    width: 300px;
+    background-color: red;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0;
+    transition: 1s;
+    animation: show 1s 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.5s;
+    -o-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+}
+
+.registrationbox{
+    width: 350px;
+    height: 550px;
+    background: #007bff;
+    color: #fff;
+    top:50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-34%);
+    box-sizing: border-box;
+    padding: 70px 30px;
+}
+
+.registrationbox h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 25px;
+}
+
+.registrationbox p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+}
+
+.registrationbox a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px
+}
+
+.registrationbox a:hover{
+    color: #FFD700;
+    text-decoration: none;
+}
+
+.registrationbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.registrationbox input[type="text"], .registrationbox input[type="password"], .registrationbox input[type="email"]
+{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    height: 40px;
+}
+
+.registrationbox input[type="text"]::-webkit-input-placeholder, 
+.registrationbox input[type="password"]::-webkit-input-placeholder, 
+.registrationbox input[type="email"]::-webkit-input-placeholder
+{
+    color: #fff
+}
+
+.registrationbox input[type="text"]:focus::-webkit-input-placeholder, 
+.registrationbox input[type="password"]:focus::-webkit-input-placeholder, 
+.registrationbox input[type="email"]:focus::-webkit-input-placeholder
+{
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.registrationbox input[type="submit"]
+{
+    border: 0;
+    outline: none;
+    background-color: #fff;
+    color: #000;
+    font-size: 16px;
+    border-radius: 20px;
+    height: 40px;
+}
+
+.registrationbox input[type="submit"]:hover{
+    background-color: #FFD700;
+    transition: 0.3s ease
+}
+
+.registrationbox .error{
+    position: absolute;
+    transform: translate(110%,-200%);
+    background-color: red;
+    border-radius: 5px;
+    padding: 10px;
+    opacity: 0;
+    transition: 1s;
+    animation: show 1s 1;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.5s;
+    -o-animation-delay: 0.5s;
+    animation-delay: 0.5s;
+}
+@keyframes show{
+    0%{opacity: 0;}
+    100%{opacity: 0.6;}
+}
+
+.postcreateform{
+    margin:0 ;
+    padding: 20px 20px 0;
+
+}
+
+.postcreateform h1{
+    margin: 0;
+    padding: 0 0 20px;
+    font-size: 35px;
+}
+
+.postcreateform p{
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.postcreateform input, .postcreateform textarea{
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.postcreateform input[type="text"], .postcreateform textarea
+{
+    font-size: 18px;
+    width: 80%;
+    padding: 0 5px
+}
+
+.postcreateform input[type=text]::-webkit-input-placeholder,
+.postcreateform textarea::-webkit-input-placeholder
+{
+    padding-left: 5px;
+}
+
+.postcreateform input[type=text]:focus::-webkit-input-placeholder,
+.postcreateform textarea:focus::-webkit-input-placeholder
+{
+    opacity: 0;
+    transition: 0.5s ease
+}
+
+.postcreateform .images{
+    padding: 0 10px 0;
+}
+
+.postcreateform .inputfile
+{
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    width: 0.1px;
+    height: 0.1px;
+}
+
+.postcreateform label{
+    width: 200px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #007bff;
+    margin: 0 0 20px;
+}
+
+.postcreateform label:hover, .postcreateform input[type="submit"]:hover{
+    background-color: #ffd700;
+    transition: 0.5s ease
+}
+
+.postcreateform input[type="submit"]{
+    border: 0;
+    outline: none;
+    background-color: #007bff;
+    color: #fff;
+    width: 250px;
+    line-height: 40px;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+}
+
+.usercard{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-45%);
+    padding-left: 20px;
+    background-color: #F6F6F6;
+    border: 1px solid #cccccc;
+    width: 400px;
+}
+
+.usercardedit{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-40%);
+    padding-left: 20px;
+    background-color: #F6F6F6;
+    border: 1px solid #cccccc;
+    width: 400px;
+}
+
+.usercard i, .usercardedit i{
+    font-size: 30px;
+    vertical-align: -3px;
+}
+
+.usercard a, .usercard a:hover{
+    text-decoration: none;
+    color: #212529;
+}
+
+.usercard h3, .usercardedit h3{
+    margin-bottom: 10px;
+}
+
+.usercard img, .usercardedit img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    position: absolute;
+    right: 20px;
+    top: 50px;
+}
+
+.usercard p, .usercardedit p{
+    font-size: 20px;
+    width: 90%
+}
+
+.usercard .profile_username p, .usercardedit .profile p{
+    width: 65%;
+}
+
+.usercardedit textarea{
+    margin: 0 0 20px;
+    border: 1px solid #ccc;
+    font-size: 17px;
+}
+
+.usercardedit input[type="file"]{
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    width: 0.1px;
+    height: 0.1px;    
+}
+
+.usercardedit label{
+    width: 200px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #007bff;
+    margin: 0 0 20px;
+}
+
+.usercardedit label:hover{
+    background-color: #ffd700;
+    transition: 0.5s ease;
+}
+
+.usercardedit input[type="submit"]{
+    border: 0;
+    outline: none;
+    background-color: #007bff;
+    color: #fff;
+    width: 250px;
+    line-height: 40px;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
 }

@@ -3,7 +3,7 @@
 {% block title %}Sigh in{% endblock %}
 
 {% block content %}
-  <div class="container">
+<!--   <div class="container">
       <div class="row">
           <div class="col-md-8 offset-md-1">
               <form action="" method="post">
@@ -22,5 +22,26 @@
               </form>    
           </div>
       </div>
+  </div> -->
+  <div class="loginbox">
+    <img src="/media/default_images/profile_image/profileimage.jpg" class="avatar">
+    <h1>Login here</h1>
+    <form action="" method="post">
+      {% csrf_token %}
+      <p>Username</p>
+      {{form.username}}
+      <p>Password</p>
+      {{form.password}}
+      <input type="submit" name="action" value="Login">
+      <a href="#">Reset password</a><br>
+      <a href="{% url 'registration' %}">Don't have an account?</a>
+      {% if form.non_field_errors %}
+        <div class="errors">
+          {{form.non_field_errors}}
+        </div>
+      {% endif %}
+    </form>
   </div>
 {% endblock %}
+
+

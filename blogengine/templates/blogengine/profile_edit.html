@@ -3,18 +3,29 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}
+<div class="usercardedit">
   <form method="POST" class="profile-edit" enctype="multipart/form-data">
     {% csrf_token %}
-    <img src="{{ user.userImage.url }}">
-    <p>Username {{user}}</p>
-    <p>Email {{user.email}}</p>
-    <p>Bio {{user.bio}}</p>
-    <p>Edit</p>
-    
-    	{{form.as_p}}
-    	<input name="profile_image" type="file" accept="image/*" multiple>
-	    <button type="submit">Submit</button>
-	    <!-- <input type="submit" value="Submit"> -->
-    
+    <h1>Profile edit</h1>
+    <div class="profile-image">
+      <img src="{{ user.userImage.url}}">
+    </div>
+    <div class="profile_username">
+      <h3>Username</h3>
+      <p>{{profile}}</p>
+    </div>
+    <div class="profile_email">
+      <h3>E-mail</h3>
+      <p>{{profile.email}}</p>
+    </div>
+    <div class="profile_bio">
+      <h3>Bio</h3>
+      <textarea name="bio" cols="40" rows="6" maxlength="200" id="id_bio">{{profile.bio}}</textarea>
+    </div>
+    <label for="id_userImage">Choose file</label>
+    <input type="file" name="userImage" accept="image/*" id="id_userImage"
+      onchange="fileInputChange(this)">
+    <input type="submit" value="Submit"> 
   </form>
+</div>
 {% endblock %}

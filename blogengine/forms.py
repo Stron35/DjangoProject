@@ -31,14 +31,14 @@ class CommentForm(forms.ModelForm):
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(max_length= 50,label='Username',label_suffix = '', widget = forms.TextInput(attrs={'class':'form-control',
-        'placeholder':'Enter your username'}))
+    username = forms.CharField(max_length= 50,label='Username',label_suffix = '',
+        widget = forms.TextInput(attrs={'placeholder':'Enter your username'}))
     email = forms.EmailField(max_length = 150, label='E-mail',label_suffix = '',
-        widget = forms.EmailInput(attrs={'class': 'form-control', 'placeholder':'Enter a valid email address'}))
-    password1=forms.CharField(label='Password',label_suffix = '', widget = forms.PasswordInput(attrs={'class': 'form-control',
-        'placeholder': 'Password'}))
-    password2=forms.CharField(label='Password again', label_suffix = '', widget = forms.PasswordInput(attrs={'class': 'form-control',
-        'placeholder': 'Password again'}))
+        widget = forms.EmailInput(attrs={'placeholder':'Enter a valid email address'}))
+    password1=forms.CharField(label='Password',label_suffix = '',
+        widget = forms.PasswordInput(attrs={'placeholder': 'Password'}))
+    password2=forms.CharField(label='Password again', label_suffix = '',
+        widget = forms.PasswordInput(attrs={'placeholder': 'Password again'}))
 
     class Meta:
         model = User
@@ -46,10 +46,8 @@ class RegisterForm(UserCreationForm):
 
 
 class LoginForm(AuthenticationForm):
-    username = forms.CharField(label='Username',label_suffix = '', widget= forms.TextInput(attrs={'class':'form-control',
-        'placeholder':'Enter your username', 'label':'Username'}))
-    password = forms.CharField(label='Password',label_suffix = '', widget = forms.PasswordInput(attrs={'class': 'form-control',
-        'placeholder': 'Password',}))
+    username = forms.CharField(label='Username',label_suffix = '', widget= forms.TextInput(attrs={'placeholder':'Enter your username', 'label':'Username'}))
+    password = forms.CharField(label='Password',label_suffix = '', widget = forms.PasswordInput(attrs={'placeholder': 'Password',}))
 
     class Meta:
         model = User

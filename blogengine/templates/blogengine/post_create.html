@@ -3,35 +3,31 @@
 {% block title %}{{title}}{% endblock %}
 
 {% block content %}
-	<h1 class="post-create-title">{{title}}</h1>
-	<form method="POST" class="post-from" enctype="multipart/form-data">
-		{% csrf_token %}
-		{% for field in form %}
-            {{field.label_tag}}
-            <div>{{field}}</div>
-            <div>{{field.help_text}}</div>
-            {% if field.errors%}
-                {% for error in field.errors %}
-                    <div>{{error}}</div>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-		{% if post.gallery.all %}
-			<div class="edit post-images">
-				{% for image_obj in post.gallery.all %}
-					<img src="{{ image_obj.thumbnail.url }}">
-				{% endfor %}
-			</div>
-		{% endif %}
-		<div class="file-field input-field">
-      		<div class="btn">
-        		<span>File</span>
-        		<input name="gallery" type="file" accept="image/*" multiple>
-      		</div>
-      		<div class="file-path-wrapper">
-        		<input class="file-path validate" type="text" placeholder="Upload one or more files">
-      		</div>
-    	</div>
-		<button class="btn btn-success">Загрузить</button>
-	</form>
+  <div class="postcreateform">
+    <h1>{{title}} {% if title == 'Post edit' %}"{{post.title}}"{% endif %}</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <p>Title</p>
+      {{form.title}}
+      {{form.title.errors}}
+      <p>Post text</p>
+      {{form.text}}
+      {{form.text.errors}}
+      
+        {% if post.gallery.all %}
+          <p>Images</p>
+          <div class="images">
+            {% for image_obj in post.gallery.all %}
+              <img src="{{image_obj.thumbnail.url}}">
+            {% endfor %}
+          </div>
+        {% endif %}
+      
+      <br>
+      <label for="file">Choose file</label>
+      <input name="gallery" class="inputfile" type="file" id="file"
+        onchange="fileInputChange(this)" accept="image/*"  multiple/><br>
+      <input type="submit" value="Загрузить">
+    </form>
+  </div>
 {% endblock %}

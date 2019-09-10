@@ -50,16 +50,14 @@
                 </a>
                 <div class="footer-text">
                   <p class="card-text">
-                    <small class="text-muted">Create at {{post.create_at}} by {{post.author}}</small>
-                  </p>
-
-                </div>
-                <a href="{% url 'profile' slug=post.author.username %}" class="profile-info">
-                  <div class="profile-image">
-                    <img src="{{post.author.userImage.url}}" alt="Profile image">
-                  </div>
-                </a>
+                    Create at {{post.create_at}} by {{post.author}}
+                    <a href="{% url 'profile' slug=post.author.username %}" class="profile-info">
+                      <img src="{{post.author.userImage.url}}" alt="Profile image">
+                    </a>
+                  </p> 
                 <a href="{% url 'post_detail' slug=post.slug %}">Comments: {{post.comment.count}}</a>
+                </div>
+                
                 
               </div>
             </div>

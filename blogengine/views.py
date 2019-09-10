@@ -16,17 +16,24 @@ def post_list(request):
     posts = Post.objects.all().order_by('-create_at')
     return render(request, 'blogengine/posts_list.html', {'posts': posts})
 
-# def post_detail(request, slug):
-#     post = get_object_or_404(Post, slug__iexact = slug)
-#     return render(request, 'blogengine/post_detail.html', {'post': post})
+# def delete_comment(request):
+#     if 
+class CommentDelete(LoginRequiredMixin, DeleteView):
+    #используя модель Comment, удаляю комментарий без использования дополнительных шаблонов с помощью
+    #метода get
+    model = Comment
+    success_url = '/'
+
+    def get(self, request, *args, **kwargs):
+        post = get_object_or_404(Post, slug__iexact = kwargs['slug'])
+        comment = Comment.objects.get(id=kwargs['id'])
+        comment.delete()
+        return redirect('post_detail', post.slug)
+
 
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blogengine/post_detail.html'
-    # form_class = CommentForm
-
-    # def get_success_url(self):
-    #     return reverse('post_detail', kwargs={'slug':self.object.slug})
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
@@ -44,11 +51,6 @@ class PostDetailView(DetailView):
             obj.author = self.request.user
             obj.save()
             return redirect('post_detail', post.slug)
-
-
-    # def form_valid(self, form):
-    #     form.save()
-    #     return super(PostDetailView, self).form_valid(form)
 
 
 class PostCreate(LoginRequiredMixin, CreateView):
@@ -103,29 +105,6 @@ class PostDelete(LoginRequiredMixin, DeleteView):
         return redirect(reverse('posts_list'))
 
 
-# class CommentCreate(LoginRequiredMixin, CreateView):
-#     model = Comment
-#     fields = ('text',)
-
-#     # success_url = '/'
-#     # template_name = 'blogengine/post_detail.html'
-
-#     # def get_context_data(self, **kwargs):
-#     #     context = super(CommentCreate, self).get_context_data(**kwargs)
-#     #     context['comment']= CommentForm()
-#     #     return context
-
-#     def form_valid(self, form):
-#         self.post = get_object_or_404(Post, slug__iexact = kwargs['slug'])
-#         comment = form.save(commit = False)
-#         print(form)
-#         comment.post = self.post
-#         comment.author = self.request.user
-#         comment.save()
-#         return redirect('post_detail', slug=self.post.slug)
-
-
-
 class RegistrationFormView(FormView):
     form_class = RegisterForm
     success_url = '/accounts/login/'
@@ -163,6 +142,18 @@ class ProfileView(DetailView):
     template_name = 'blogengine/profile.html'
     slug_field = 'username'
 
+    def get(self, request, *args, **kwargs):
+        print(dir(self.slug_field))
+        print(self.slug_field)
+        print(dir(self.request.path))
+        print(self.request.path)
+        print(self.request.user)
+        print(str(self.request.path).rsplit('/', maxsplit=2)[1])
+        profile_nickname = str(self.request.path).rsplit('/', maxsplit=2)[1]
+        profile = get_object_or_404(User, username=profile_nickname)
+        print(profile)
+        return render(request, 'blogengine/profile.html', {'profile':profile})
+
 
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = User
@@ -170,6 +161,26 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     slug_field = 'username'
     template_name = 'blogengine/profile_edit.html'
 
+    def get(self, request, *args, **kwargs):
+        print(request.user)
+        print(dir(kwargs))
+        print(dir(args))
+        print(dir(kwargs))
+        print(kwargs['slug'])
+        print(dir(request))
+        print(self.request.path)
+        print(str(self.request.path).rsplit('/', maxsplit=3))
+        print(str(self.request.path).rsplit('/', maxsplit=3)[1])
+        profile_nickname_path = str(self.request.path).rsplit('/', maxsplit=3)[1]
+        print(profile_nickname_path)
+        #проверяем по никнейму пользователя
+        if str(request.user)==profile_nickname_path:
+            profile_edit = get_object_or_404(User, username=profile_nickname_path)
+            return render(request, 'blogengine/profile_edit.html', {'profile':profile_edit})
+        else:
+            return redirect('posts_list')
+
     def form_valid(self, form):  
         form.save()
         return super().form_valid(form)
+
