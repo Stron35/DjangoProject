@@ -16,7 +16,6 @@ def generate_slug(string):
     return new_slug+'-'+str(int(timezone.now().timestamp()))
 
 def generate_path_image(instance, filename):
-    print(dir(instance))
     time_now = timezone.now()
     ext=filename.split('.')[-1]
     filename = '.'.join([str(uuid.uuid4()),str(ext)])
@@ -106,6 +105,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text
+
+    class Meta:
+        ordering = ('-create_at', )
 
 
 

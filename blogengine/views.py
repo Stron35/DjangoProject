@@ -16,8 +16,7 @@ def post_list(request):
     posts = Post.objects.all().order_by('-create_at')
     return render(request, 'blogengine/posts_list.html', {'posts': posts})
 
-# def delete_comment(request):
-#     if 
+
 class CommentDelete(LoginRequiredMixin, DeleteView):
     #используя модель Comment, удаляю комментарий без использования дополнительных шаблонов с помощью
     #метода get
@@ -34,6 +33,7 @@ class CommentDelete(LoginRequiredMixin, DeleteView):
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blogengine/post_detail.html'
+
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
@@ -111,12 +111,10 @@ class RegistrationFormView(FormView):
     template_name = 'blogengine/registration.html'
 
     def form_valid(self, form):
-        print(form)
         form.save()
         return super(RegistrationFormView, self).form_valid(form)
 
     def form_invalid(self, form):
-        print(form)
         return super(RegistrationFormView, self).form_invalid(form)
 
 
@@ -143,15 +141,8 @@ class ProfileView(DetailView):
     slug_field = 'username'
 
     def get(self, request, *args, **kwargs):
-        print(dir(self.slug_field))
-        print(self.slug_field)
-        print(dir(self.request.path))
-        print(self.request.path)
-        print(self.request.user)
-        print(str(self.request.path).rsplit('/', maxsplit=2)[1])
         profile_nickname = str(self.request.path).rsplit('/', maxsplit=2)[1]
         profile = get_object_or_404(User, username=profile_nickname)
-        print(profile)
         return render(request, 'blogengine/profile.html', {'profile':profile})
 
 
@@ -162,17 +153,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'blogengine/profile_edit.html'
 
     def get(self, request, *args, **kwargs):
-        print(request.user)
-        print(dir(kwargs))
-        print(dir(args))
-        print(dir(kwargs))
-        print(kwargs['slug'])
-        print(dir(request))
-        print(self.request.path)
-        print(str(self.request.path).rsplit('/', maxsplit=3))
-        print(str(self.request.path).rsplit('/', maxsplit=3)[1])
-        profile_nickname_path = str(self.request.path).rsplit('/', maxsplit=3)[1]
-        print(profile_nickname_path)
         #проверяем по никнейму пользователя
         if str(request.user)==profile_nickname_path:
             profile_edit = get_object_or_404(User, username=profile_nickname_path)

@@ -221,6 +221,7 @@ body{
     margin-bottom: 20px;
 }
 
+
 .registrationbox input[type="text"], .registrationbox input[type="password"], .registrationbox input[type="email"]
 {
     border: none;
@@ -471,4 +472,88 @@ body{
     border-radius: 10px;
     font-size: 20px;
     margin-bottom: 20px;
+}
+
+.comments{
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 10px;
+    border: 1px solid #ccc;
+}
+
+.comments .commentform textarea{
+    width: 100%;
+    height: 60px;
+    border: none;
+    resize: none;
+    border-top: 1px solid #ccc;
+    border-bottom:1px solid #ccc;
+}
+
+.comments .commentform textarea:focus{
+    padding: 3px 10px;
+    outline: none;
+}
+
+.comments .commentform textarea::-webkit-input-placeholder{
+    padding: 2px 5px 0;
+}
+
+.comments .commentform textarea:focus::-webkit-input-placeholder{
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.comments .commentform input[type="submit"]{
+    border: 0;
+    outline: none;
+    background-color: #007bff;
+    color: #fff;
+    width: 150px;
+    line-height: 40px;
+    font-weight: bold;
+    border-radius: 10px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.comment{
+    margin-top: 10px;
+    padding: 0 20px 0;
+    line-height: 1.4;
+}
+
+.comment .comment-info div{
+    display: inline-block;
+}
+
+.comment .comment-info img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.comment .comment-info p{
+    display: inline;
+    font-size: 15px;
+    color: #6c757d;
+}
+
+.comment .comment-info a, .comment .comment-info a:hover{
+    text-decoration: none;
+}
+
+.comment .comment-info a p{
+    color: #000
+}
+
+.comment .comment-info a i{
+    text-decoration: none;
+    color: #6c757d;
+    vertical-align: -8px;
+}
+
+.comment .comment-text{
+    font-size: 18px;
 }

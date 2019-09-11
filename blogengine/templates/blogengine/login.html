@@ -3,26 +3,6 @@
 {% block title %}Sigh in{% endblock %}
 
 {% block content %}
-<!--   <div class="container">
-      <div class="row">
-          <div class="col-md-8 offset-md-1">
-              <form action="" method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                <div class="form-group">
-                  {{field.label_tag}}
-                  {{field}}
-                  <small>{{field.help_text}}</small>                  
-                </div>
-                {% endfor %}
-                {% if form.non_field_errors %}
-                  <div class="alert alert-danger" role="alert">{{form.non_field_errors}}</div>
-                {% endif %}
-                <button type="submit" class="btn btn-primary" name="action">Submit</button>
-              </form>    
-          </div>
-      </div>
-  </div> -->
   <div class="loginbox">
     <img src="/media/default_images/profile_image/profileimage.jpg" class="avatar">
     <h1>Login here</h1>
