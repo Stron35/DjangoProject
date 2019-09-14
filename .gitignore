@@ -7,4 +7,5 @@ db.sqlite3
 /media/post_images
 /media/user_image
 /static_cdn
+/sent_emails
 .DS_Store

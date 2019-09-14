@@ -22,9 +22,13 @@
       <h3>Bio</h3>
       <textarea name="bio" cols="40" rows="6" maxlength="200" id="id_bio">{{profile.bio}}</textarea>
     </div>
-    <label for="id_userImage">Choose file</label>
+    
+    <label for="id_userImage">Change avatar</label>
     <input type="file" name="userImage" accept="image/*" id="id_userImage"
       onchange="fileInputChange(this)">
+    <div class="profile_password_change">
+      <a href="{% url 'password_change' %}">Change password</a>
+    </div>
     <input type="submit" value="Submit"> 
   </form>
 </div>

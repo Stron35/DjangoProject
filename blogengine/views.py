@@ -118,23 +118,6 @@ class RegistrationFormView(FormView):
         return super(RegistrationFormView, self).form_invalid(form)
 
 
-class LoginFormView(FormView):
-    form_class = LoginForm
-    success_url = '/'
-    template_name = 'blogengine/login.html'
-
-    def form_valid(self, form):
-        self.user = form.get_user()
-        login(self.request, self.user)
-        return super(LoginFormView, self).form_valid(form)
-
-
-class LogoutView(LoginRequiredMixin, View):
-    def get(self, request):
-        logout(request)
-        return redirect(reverse('posts_list'))
-
-
 class ProfileView(DetailView):
     model = User
     template_name = 'blogengine/profile.html'
@@ -154,8 +137,9 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 
     def get(self, request, *args, **kwargs):
         #проверяем по никнейму пользователя
-        if str(request.user)==profile_nickname_path:
-            profile_edit = get_object_or_404(User, username=profile_nickname_path)
+        profile_nickname = str(self.request.path).rsplit('/', maxsplit=3)[1]
+        if str(request.user)==profile_nickname:
+            profile_edit = get_object_or_404(User, username=profile_nickname)
             return render(request, 'blogengine/profile_edit.html', {'profile':profile_edit})
         else:
             return redirect('posts_list')

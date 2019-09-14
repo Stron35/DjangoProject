@@ -13,7 +13,7 @@
       <p>Password</p>
       {{form.password}}
       <input type="submit" name="action" value="Login">
-      <a href="#">Reset password</a><br>
+      <a href="{% url 'password_reset' %}">Reset password</a><br>
       <a href="{% url 'registration' %}">Don't have an account?</a>
       {% if form.non_field_errors %}
         <div class="errors">
