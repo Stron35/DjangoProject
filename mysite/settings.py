@@ -76,8 +76,13 @@ LOGIN_REDIRECT_URL = 'posts_list'
 LOGOUT_REDIRECT_URL = 'posts_list'
 
 #E-mail services
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'stronblog@gmail.com'
+EMAIL_HOST_PASSWORD = 'Modern1998'
+# EMAIL_FILE_PATH = os.path.join(BASE_DIR, "sent_emails")
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases

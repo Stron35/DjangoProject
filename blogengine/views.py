@@ -1,13 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView, FormMixin
-from django.views.generic.base import View
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
+from django.conf import settings
 from .models import Post, Gallery, Comment
 from .forms import *
 
@@ -112,6 +111,8 @@ class RegistrationFormView(FormView):
 
     def form_valid(self, form):
         form.save()
+        recipient_list=form.cleaned_data['email']
+        registration_email(self.request, recipient_list)
         return super(RegistrationFormView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -148,3 +149,11 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         form.save()
         return super().form_valid(form)
 
+def registration_email(request, recipient):
+    subject = 'Thank you for registering on my site'
+    message = "Now it's testing email"
+    email_from = settings.EMAIL_HOST_USER
+    recipient_list = []
+    recipient_list.append(recipient)
+    send_mail( subject, message, email_from, recipient_list)
+    return redirect('posts_list')
