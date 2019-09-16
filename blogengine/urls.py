@@ -16,6 +16,7 @@ urlpatterns = [
     path('post/new/', views.PostCreate.as_view(), name = 'post_create'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/registration/', views.RegistrationFormView.as_view(), name = 'registration'),
+    path('accounts/activate/<uidb64>/<token>/', views.activate_account, name = 'activate_account'),
     path('accounts/profile/<str:slug>/', views.ProfileView.as_view(), name= 'profile'),
     path('accounts/profile/<str:slug>/edit/', views.ProfileUpdateView.as_view(), name= 'profile_edit'),
     path('post/<str:slug>/delete/', views.PostDelete.as_view(), name = 'post_delete'),
