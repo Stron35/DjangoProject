@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.html import strip_tags
 from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_text
 from .models import Post, Gallery, Comment
@@ -129,8 +130,10 @@ class RegistrationFormView(FormView):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
+        # html_message = strip_tags(message)
         to_email = form.cleaned_data['email']
         email = EmailMessage(mail_subject, message, to=[to_email])
+        email.content_subtype = "html"
         email.send()
 
 

@@ -1,5 +1,94 @@
 {% autoescape off %}
-  Hi {{ user.username }},
+  <!-- Hi {{ user.username }},
   Please click on the link to confirm your registration,
-  http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}
+  http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %} -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome to Stronblog</title>
+</head>
+<body>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      font-family: arial;
+    }
+    .header{
+      background-color: #007bff;
+      color: #fff;
+    }
+    .header .logo{
+      font-size: 30px;
+      padding: 12px 0px 12px 20px;
+      line-height: 1.5;
+    }
+    .main{
+      margin: 0 20px;
+    }
+    .main p {
+      line-height: 1.5;
+    }
+
+    .link{
+      width: 200px;
+      line-height: 40px;
+      text-align: center;
+      color: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 20px;
+      font-weight: bold;
+      background-color: #007bff; 
+    }
+    .link a{
+      text-decoration: none;
+      color:#fff;
+    }
+
+    .footer{
+      margin: 0;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 0 10px 20px;
+    }
+    .footer p{
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .footer a{
+      text-decoration: none;
+      color: #fff;
+    }
+  </style>
+  <div class="header">
+    <div class="logo">
+      <span>Stron blog</span>
+    </div>
+  </div>
+  <div class="main">
+    <div class="text">
+      <p>Hi, {{user.username}}</p>
+      <p>Thank you for registration on my web blog "Stron blog". I'll be happy if you have click on the link. It's link activate your account and you'll post some article</p>
+    </div>
+    <div class="link">
+      <a href="http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}">Click here</a>
+    </div>
+    <div class="text">
+      <p>If link don't work, put on your browers this link http://{{ domain }}{% url 'activate_account' uidb64=uid token=token %}</p>
+      <p>But if you hadn't been registering on my blog, you can do it in http://{{ domain }}</p>
+      <p>Thank you!</p>
+      <p>Your friends and team {{domain}}</p>
+    </div>
+  </div>
+  <div class="footer">
+    <p>It's only testing =)</p>
+    <p>Register on my blog <a href="{{domain}}">{{domain}}</a></p>
+  </div>
+</body>
+</html>
 {% endautoescape %}
