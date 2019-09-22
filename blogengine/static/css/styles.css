@@ -2,17 +2,21 @@ a.navbar-brand{
     font-size: 30px;
 }
 
-i.btn-circle {
-    position: fixed; /* Фиксированное положение */
-    right: 20px; /* Расстояние от правого края окна браузера */
-    bottom: 5%; /* Расстояние снизу */
-    font-size: 48px;
-    height: 48px;
-    width: 48px;
+.new-post-circle{
+   position: fixed;
+   right: 5%;
+   bottom: 40px;
+}
+
+a i.btn-circle {
     text-align: center;
-    color: #fff;
     background-color: #007bff;;
-    border-radius: 50%;
+    border-radius: 48px;
+    font-size: 60px;
+    height: 60px;
+    width: 60px;
+    color: #fff;
+    
 }
 
 .errorlist{
@@ -66,6 +70,42 @@ body{
     margin: 0;
     padding: 0;
 }
+
+.footer{
+    margin: 0;
+    background-color: #007bff;
+    padding: 10px 20px;
+    color: #fff;
+
+}
+.footer p{
+    margin: 0;
+}
+
+.page-load{
+    display: block;
+    margin: 20px auto;
+/*    margin-left: auto;
+    margin-right: auto;*/
+}
+
+.page-load a{
+    width: 400px;
+    line-height: 40px;
+    color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #007bff;
+}
+
+.page-load a:hover{
+    text-decoration: none;
+    color: #fff;
+}
+
 
 .loginbox{
     width: 320px;
@@ -653,4 +693,10 @@ body{
 .passwordchangebox input[type="submit"]:hover{
     background-color: #ffd700;
     transition: 0.5s ease;
+}
+
+@media screen and (max-width: 720px){
+    .new-post-circle{
+        visibility: hidden;
+    }
 }

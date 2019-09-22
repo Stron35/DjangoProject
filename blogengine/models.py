@@ -54,12 +54,13 @@ class User(AbstractUser):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     title = models.CharField(max_length = 100)
-    text = models.TextField()
+    text = models.TextField(blank=True)
     slug = models.SlugField(max_length=150, blank = True)
     create_at = models.DateTimeField(auto_now_add = True)
 
     class Meta:
         verbose_name_plural = 'Post'
+        ordering = ('-create_at', )
 
     def get_absolute_url(self):
         return reverse('post_detail', kwargs = {'slug': self.slug})

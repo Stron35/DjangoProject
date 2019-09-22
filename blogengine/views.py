@@ -1,8 +1,10 @@
 from django.http import HttpResponse #Заменить
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.sites.shortcuts import get_current_site
+from django.views.generic.list import ListView 
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView, FormMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.contrib.auth import login
@@ -18,10 +20,26 @@ from .models import Post, Gallery, Comment
 from .forms import *
 from .token import account_activation_token
 
-# Create your views here.
-def post_list(request):
-    posts = Post.objects.all().order_by('-create_at')
-    return render(request, 'blogengine/posts_list.html', {'posts': posts})
+
+class PostListView(ListView):
+    model = Post
+    template_name = 'blogengine/posts_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['posts'] = Post.objects.all()
+        paginator = Paginator(context['posts'],4)
+        page = self.request.GET.get('page')
+        context['max_pages'] = paginator.num_pages
+        try:
+            context['posts'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['posts'] = paginator.page(1)
+        except EmptyPage:
+            context['posts'] = paginator.page(paginator.num_pages)
+
+        return context
 
 
 class CommentDelete(LoginRequiredMixin, DeleteView):
@@ -130,15 +148,11 @@ class RegistrationFormView(FormView):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                 'token': account_activation_token.make_token(user),
             })
-        # html_message = strip_tags(message)
         to_email = form.cleaned_data['email']
         email = EmailMessage(mail_subject, message, to=[to_email])
         email.content_subtype = "html"
         email.send()
 
-
-        # recipient_list=form.cleaned_data['email']
-        # registration_email(self.request, recipient_list)
         return super(RegistrationFormView, self).form_valid(form)
 
     def form_invalid(self, form):
@@ -175,14 +189,6 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
         form.save()
         return super().form_valid(form)
 
-# def registration_email(request, recipient):
-#     subject = 'Thank you for registering on my site'
-#     message = "Now it's testing email"
-#     email_from = settings.EMAIL_HOST_USER
-#     recipient_list = []
-#     recipient_list.append(recipient)
-#     send_mail( subject, message, email_from, recipient_list)
-#     return redirect('posts_list')
 
 def activate_account(request, uidb64, token):
     try:

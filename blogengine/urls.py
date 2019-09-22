@@ -12,7 +12,7 @@ from . import views
 # accounts/reset/done/ [name='password_reset_complete']
 
 urlpatterns = [
-    path('', views.post_list, name = 'posts_list'),
+    path('', views.PostListView.as_view(), name = 'posts_list'),
     path('post/new/', views.PostCreate.as_view(), name = 'post_create'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/registration/', views.RegistrationFormView.as_view(), name = 'registration'),

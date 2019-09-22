@@ -12,6 +12,7 @@
       {{form.title.errors}}
       <p>Post text</p>
       {{form.text}}
+      <div id="debug"></div>
       {{form.text.errors}}
       
         {% if post.gallery.all %}
@@ -27,6 +28,7 @@
       <label for="file">Choose file</label>
       <input name="gallery" class="inputfile" type="file" id="file"
         onchange="fileInputChange(this)" accept="image/*"  multiple/><br>
+      <div id="debugIm"></div>
       <input type="submit" value="Загрузить">
     </form>
   </div>
